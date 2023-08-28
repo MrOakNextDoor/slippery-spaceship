@@ -1,6 +1,6 @@
 
 #   Libraries
-import pygame
+import pygame as pg
 
 import misc
 
@@ -11,25 +11,25 @@ class App:
 
     def __init__(self, testing=False):
         
-        pygame.init()
+        pg.init()
 
-        self.caption = "Pixelsword"
-        self.display = pygame.display.set_mode((960, 540), pygame.RESIZABLE)
+        self.caption = "Slippery Spaceship"
+        self.display = pg.display.set_mode((960, 540), pg.RESIZABLE)
         self.running = False
         self.clock = misc.Clock()
 
-        self.testing_font = pygame.font.SysFont("Bahnschrift", 16)
+        self._testing_font = pg.font.SysFont("Bahnschrift", 16)
 
         self._testing = testing
 
     @property
-    def caption(self):
+    def caption(self) -> str:
         return self._caption
     
     @caption.setter
     def caption(self, value: str):
         self._caption = value
-        pygame.display.set_caption(self._caption)
+        pg.display.set_caption(self._caption)
 
     def run(self):
         
@@ -42,7 +42,7 @@ class App:
 
         # just put cleanup code here :DD
 
-        pygame.quit()
+        pg.quit()
 
     def render(self):
 
@@ -53,26 +53,26 @@ class App:
         #   run if testing code
         if self._testing:
             #   Improve font rendering / make font renderer etc etc
-            fps = self.testing_font.render(
+            fps = self._testing_font.render(
                 f"FPS: {round(self.clock._clock.get_fps())}", 
                 True, (230, 50, 50))
             self.display.blit(fps, 
                 (self.display.get_width() - fps.get_width() - 5, 
                  self.display.get_height() - fps.get_height() - 5))
 
-        pygame.display.update()
+        pg.display.update()
 
     def process_events(self):
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
                 self.running = False
                 break
 
             #   run if testing code
             if self._testing:
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_ESCAPE:
                         self.running = False
                         break
 

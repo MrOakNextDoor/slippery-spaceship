@@ -7,7 +7,7 @@ from pygame.time import Clock as _clock
 
 #   Code
 class Clock:
-    def __init__(self, framerate=360, base_framerate=60):
+    def __init__(self, framerate: int=360, base_framerate: int=60):
         
         self._clock = _clock()
 
